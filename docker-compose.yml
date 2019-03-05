@@ -1,0 +1,13 @@
+version:  '2'
+services:
+  mongodb:
+    image: mongo:3.2-jessie
+    ports:
+      - "27017:27017"
+    container_name: mongo-movie
+    network_mode: host
+    depends_on:
+      - config-server
+    volumes:
+      - '/home/cgi/data/mysql:/data/db'
+    command: bash -c "mongoimport --db Test --collection test --file input.json"
