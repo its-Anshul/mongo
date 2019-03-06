@@ -1,13 +1,18 @@
 version:  '2'
 services:
   mongodb:
-    image: mongo:3.2-jessie
+   image: mongo
+   ports:
+     - "27017:27017"
+
+  mongo-seed:
+   build: ./mongo-seed
+   links:
+     - mongodb
+
+  node-red:
+    image: jamesbrink/node-red:0.16.2
     ports:
-      - "27017:27017"
-    container_name: mongo-movie
-    network_mode: host
-    depends_on:
-      - config-server
+      - "1880:1880"
     volumes:
-      - '/home/cgi/data/mysql:/data/db'
-    command: bash -c "mongoimport --db Test --collection test --file input.json"
+      - /Node-Red:/data
