@@ -11,7 +11,7 @@ services:
      - mongodb
 
   node-red:
-    image: jamesbrink/node-red:0.16.2
+    build: ./Node-Red
     ports:
       - "1880:1880"
     volumes:
